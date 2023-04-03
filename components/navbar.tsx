@@ -1,16 +1,22 @@
 import { useCallback, useState } from "react";
 import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
-import { BsChevronDown } from 'react-icons/bs'
-import { BsSearch } from 'react-icons/bs'
+import { BsChevronDown, BsSearch, BsBell } from 'react-icons/bs'
+import AccountMenu from "./AccountMenu";
+
 
 
 
 const Navbar = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const [showAccountMenu, setShowAccountMenu] = useState(false);
 
     const toggleMobileMenu = useCallback(() => {
         setShowMobileMenu((current) => !current);
+    }, []);
+
+    const toggleAccountMenu = useCallback(() => {
+        setShowAccountMenu((current) => !current);
     }, []);
 
     return (
@@ -34,6 +40,18 @@ const Navbar = () => {
                     <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
                         <BsSearch />
                     </div>
+                    <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+                        <BsBell />
+                    </div>
+
+                    <div onClick={toggleAccountMenu} className="flex flex-row items-center gap-2 cursor-pointer relative">
+                        <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
+                            <img src="/images/default-blue.png" alt="" />
+                        </div>
+                        <BsChevronDown className="text-white transition" />
+                        <AccountMenu visible={showAccountMenu} />
+                    </div>
+
                 </div>
             </div>
         </nav>
